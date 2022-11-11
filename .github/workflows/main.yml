@@ -12,11 +12,17 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+  
       - name: Install Ngrok
         run: npm install -g ngrok
       - name: Connect Ngrok.
         run: ngrok authtoken ${{ secrets.NGROK_AUTH_TOKEN }}
-          
+      - name: Installing PHP
+        uses: shivammathur/setup-php@master
+        with:
+          php-version: 7.3
+      - name: Run Build Php
+        run: php -S 127.0.0.1:6060
       - name: Running Ngrok
-        run: ngrok http 80
+        run: ngrok http 6060
         
